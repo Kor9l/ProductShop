@@ -19,13 +19,20 @@ public class Product implements Serializable {
         this.price = price;
         this.category = category;
         this.id = id;
+        this.actualPrice = price;
 
     }
 
     @Override
     public String toString() {
-
-        return ("ID:"+id+" Name:"+name+" Category:"+ category);
+        return "Product{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", category='" + category + '\'' +
+                ", price=" + price +
+                ", actualPrice=" + actualPrice +
+                ", discount=" + discount +
+                '}';
     }
 
     public static void setProductCounter(int productCounter) {

@@ -4,6 +4,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.Scanner;
 
 public  class ProductService {
@@ -31,7 +32,9 @@ public  class ProductService {
     }
 
     //Get product NAme by ID
-    public static   String getProductID(int id){
+    public static   String getProductNamebyID( ){
+        System.out.print("Enter product ID:");
+        int id = scanInt();
         for (Product prod:products){
             if (prod.getId()==id){
                 return prod.getName();
@@ -41,7 +44,9 @@ public  class ProductService {
     }
 
     //Delete product
-    public static void deleteProduct(int id){
+    public static void deleteProduct( ){
+        System.out.print("Enter ID to delete:");
+        int id = scanInt();
         products.removeIf(prod -> prod.getId() == id);
 
     }
@@ -69,7 +74,9 @@ public  class ProductService {
     }
 
     //Show products in category
-    public static void podCatShow(String cat) {
+    public static void prodCatShow( ) {
+        System.out.print("Enter category of product:");
+        String cat = scanString();
         for (Product prod:products) {
             if(prod.getCategory().equals(cat)){
                 System.out.println(prod);
@@ -80,7 +87,11 @@ public  class ProductService {
 
     //Add discount for cat
     //Show products in category
-    public static void addDisProd(String cat,double discount) {
+    public static void addDisProd( ) {
+        System.out.print("Enter category of product:");
+        String cat = scanString();
+        System.out.println("Enter discount:");
+        double discount = scanDouble();
         for (Product prod:products) {
             if(prod.getCategory().equals(cat)){
                 prod.setDiscount(discount);
@@ -88,6 +99,34 @@ public  class ProductService {
 
         }
     }
+
+    //Sort by name
+        public static void sortByName(){
+        products.sort(Comparator.comparing(Product::getName));
+            showProducts();
+        }
+        public static void sortByPrice(){
+        products.sort(Comparator.comparing(Product::getPrice));
+            showProducts();
+        }
+        public static void sortByActPrice(){
+        products.sort(Comparator.comparing(Product::getActualPrice));
+            showProducts();
+        }
+    //Scanners
+    public static int scanInt() {
+        Scanner scanner = new Scanner(System.in);
+        return Integer.parseInt(scanner.nextLine());
+    }
+    public static String scanString(){
+        Scanner scanner = new Scanner(System.in);
+        return scanner.nextLine();
+    }
+    public static double scanDouble(){
+        Scanner scanner = new Scanner(System.in);
+        return Double.parseDouble(scanner.nextLine());
+    }
+
 
 
 }
